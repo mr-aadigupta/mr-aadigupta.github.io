@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-zinc-950 text-zinc-300">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aadi Gupta | Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#09090b', // zinc-950
+                            card: '#18181b', // zinc-900
+                            border: '#27272a', // zinc-800
+                            text: '#d4d4d8', // zinc-300
+                            heading: '#fafafa', // zinc-50
+                            accent: '#3f3f46' // zinc-700
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background-color: #fafafa; transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        
+        /* Bouncy fade in animation for SPA transitions */
+        .fade-in {
+            animation: bouncyFadeIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes bouncyFadeIn {
+            0% { opacity: 0; transform: translateY(20px) scale(0.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Fluid and bouncy hover effect */
+        .bouncy-hover {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .bouncy-hover:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Fluid and bouncy text flow animations on scroll */
+        .text-pop-up {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .text-pop-up.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+
+        /* Chamfer UI Elements (All 4 sides) */
+        .chamfer-sm {
+            clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
+            border-radius: 0 !important;
+        }
+        .chamfer {
+            clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);
+            border-radius: 0 !important;
+        }
+        .chamfer-lg {
+            clip-path: polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px);
+            border-radius: 0 !important;
+        }
+
+        /* Distinct Highlight for Project Cards with Sunlight Gradient */
+        .project-box {
+            background: linear-gradient(135deg, rgba(120, 95, 45, 0.2) 0%, rgba(24, 24, 27, 1) 35%, rgba(24, 24, 27, 1) 100%);
+            border: 1px solid #52525b; 
+            box-shadow: inset 2px 2px 10px rgba(255, 220, 120, 0.05), 0 10px 30px -10px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .project-box:hover {
+            background: linear-gradient(135deg, rgba(160, 120, 50, 0.3) 0%, rgba(39, 39, 42, 1) 45%, rgba(24, 24, 27, 1) 100%);
+            border-color: #a3874e; /* Sunlight glow */
+            box-shadow: inset 2px 2px 15px rgba(255, 220, 120, 0.1), 0 10px 30px -10px rgba(0,0,0,0.6);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-zinc-800 selection:text-white flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="w-full py-6 px-6 md:px-12 flex justify-between items-center sticky top-0 bg-brand-bg/70 backdrop-blur-md z-50 border-b border-brand-border">
+        <a href="#" onclick="goHome()" class="text-xl font-bold tracking-tight text-brand-heading">AG</a>
+        
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+            <a href="#about" onclick="goHome()" class="nav-link text-brand-text hover:text-brand-heading transition-colors">About Me</a>
+            <a href="#skills" onclick="goHome()" class="nav-link text-brand-text hover:text-brand-heading transition-colors">Skills</a>
+            <a href="#projects" onclick="goHome()" class="nav-link text-brand-text hover:text-brand-heading transition-colors">Projects</a>
+            <a href="#contact" onclick="goHome()" class="nav-link text-brand-text hover:text-brand-heading transition-colors">Contact</a>
+            
+            <div class="w-px h-5 bg-brand-border mx-2"></div> <!-- Divider -->
+            
+            <a href="https://github.com/mr-aadigupta" target="_blank" class="text-brand-text hover:text-brand-heading transition-colors text-xl" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/mr-aadigupta/" target="_blank" class="text-brand-text hover:text-brand-heading transition-colors text-xl" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        
+        <!-- Mobile Menu Icon -->
+        <div class="md:hidden flex items-center space-x-4">
+            <a href="https://github.com/mr-aadigupta" target="_blank" class="text-brand-text text-lg"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/mr-aadigupta/" target="_blank" class="text-brand-text text-lg"><i class="fab fa-linkedin"></i></a>
+            <button id="mobile-menu-btn" class="text-brand-heading focus:outline-none ml-2">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden fixed w-full bg-brand-card border-b border-brand-border z-40 px-6 py-4 flex flex-col space-y-4 shadow-lg top-[73px]">
+        <a href="#about" onclick="goHome(); closeMobileMenu();" class="mobile-link text-brand-text hover:text-brand-heading font-medium">About Me</a>
+        <a href="#skills" onclick="goHome(); closeMobileMenu();" class="mobile-link text-brand-text hover:text-brand-heading font-medium">Skills</a>
+        <a href="#projects" onclick="goHome(); closeMobileMenu();" class="mobile-link text-brand-text hover:text-brand-heading font-medium">Projects</a>
+        <a href="#contact" onclick="goHome(); closeMobileMenu();" class="mobile-link text-brand-text hover:text-brand-heading font-medium">Contact</a>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MAIN VIEW (Home, About, Projects, Skills)  -->
+    <!-- ========================================== -->
+    <div id="main-view" class="flex-grow">
+        <main class="max-w-5xl mx-auto px-6 md:px-12">
+
+            <!-- Hero / About Section -->
+            <section id="about" class="py-20 md:py-32 grid grid-cols-1 md:grid-cols-12 gap-12 items-center border-b border-brand-border">
+                <div class="md:col-span-7 space-y-6 order-2 md:order-1 text-pop-up">
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-brand-heading leading-tight">
+                        Hi, I'm Aadi Gupta. <br>
+                        <span class="text-zinc-500 font-medium text-2xl md:text-4xl">B.Tech Student & Developer.</span>
+                    </h1>
+                    <div class="text-base md:text-lg text-brand-text leading-relaxed font-light space-y-4 text-pop-up delay-100">
+                        <p>
+                            I am currently pursuing my <strong>B.Tech degree (Class of 2026)</strong> at the <strong>Vellore Institute of Technology (VIT)</strong>, Vellore. 
+                        </p>
+                        <p>
+                            I was born and raised in Jhajjar, Haryana, where I completed my early schooling up to the 10th grade. I then moved to Delhi to complete my 11th and 12th grades under the CBSE board, which shaped my analytical foundation.
+                        </p>
+                        <p>
+                            I have always had a deep love for coding. My core interests lie in building robust software solutions and exploring the bridge between software and hardware through sensor integration and hardware prototyping.
+                        </p>
+                    </div>
+                    <div class="flex gap-4 pt-4 text-pop-up delay-200">
+                        <a href="#contact" class="px-6 py-3 bg-zinc-100 text-zinc-950 font-semibold rounded-full hover:bg-white bouncy-hover">Contact Me</a>
+                        <a href="#projects" class="px-6 py-3 border border-brand-border text-brand-heading font-medium rounded-full hover:bg-brand-card bouncy-hover">View Projects</a>
+                    </div>
+                </div>
+                <div class="md:col-span-5 order-1 md:order-2 flex justify-center md:justify-end text-pop-up delay-300">
+                    <div class="w-full max-w-[280px] aspect-square relative overflow-hidden chamfer-lg bg-brand-card shadow-2xl border border-brand-border">
+                        <img src="ag.jpg" alt="Aadi Gupta" onerror="this.src='https://placehold.co/400x400/18181b/fafafa?text=AG'" class="w-full h-full object-cover object-center transition-all duration-500">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="py-24 border-b border-brand-border text-center">
+                <div class="mb-10 text-pop-up">
+                    <h2 class="text-3xl font-bold tracking-tight text-brand-heading mb-3">Technical Skills</h2>
+                    <p class="text-brand-text font-light">Languages, tools, and methodologies I work with. Hover for details.</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4 text-pop-up delay-100">
+                    
+                    <!-- Skill with Tooltip -->
+                    <div class="relative group cursor-default">
+                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Python</span>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                            My primary language for building backend logic, data parsing, and AI integrations (like faster-whisper).
+                        </div>
+                    </div>
+
+                    <div class="relative group cursor-default">
+                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">HTML5 & CSS3</span>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                            Used to structure and beautifully style the visual front-end of my web applications and portfolios.
+                        </div>
+                    </div>
+
+                    <div class="relative group cursor-default">
+                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Git & GitHub</span>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                            Version control essentials for tracking code changes and collaborating efficiently with my hackathon teams.
+                        </div>
+                    </div>
+
+                    <div class="relative group cursor-default">
+                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Arduino & ESP32</span>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                            Microcontrollers I program (in C/C++) to read sensors, control motors, and act as the brain for my hardware projects.
+                        </div>
+                    </div>
+
+                    <div class="relative group cursor-default">
+                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Hardware Prototyping</span>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                            Building real, physical systems on breadboards, managing power distribution, and assembling rovers and safety tools.
+                        </div>
+                    </div>
+
+                    <div class="relative group cursor-default">
+                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Sensor Integration</span>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                            Connecting physical sensors (like ultrasonic radars and barometers) to code so computers can understand the real world.
+                        </div>
+                    </div>
+
+                    <div class="relative group cursor-default">
+                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">OrCAD X</span>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                            Designing and simulating electronic circuits and PCB layouts for custom hardware projects.
+                        </div>
+                    </div>
+
+                    <div class="relative group cursor-default">
+                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">SolidWorks</span>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                            Creating 3D models and mechanical designs for structural components, chassis, and functional parts.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-12 text-pop-up delay-200">
+                    <h3 class="text-xl font-semibold tracking-tight text-brand-heading mb-4 text-center">Currently Learning & Exploring</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                        <div class="relative group cursor-default w-full">
+                            <span class="flex justify-center w-full px-5 py-3 bg-brand-bg border border-brand-accent/50 rounded-xl text-sm font-medium text-zinc-400 group-hover:text-brand-heading group-hover:border-zinc-400 bouncy-hover items-center gap-2">
+                                <i class="fas fa-microchip fa-fade text-xs opacity-70"></i> Edge AI / TinyML
+                            </span>
+                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                                Exploring how to run machine learning models directly on microcontrollers to make hardware projects smarter locally.
+                            </div>
+                        </div>
+                        <div class="relative group cursor-default w-full">
+                            <span class="flex justify-center w-full px-5 py-3 bg-brand-bg border border-brand-accent/50 rounded-xl text-sm font-medium text-zinc-400 group-hover:text-brand-heading group-hover:border-zinc-400 bouncy-hover items-center gap-2">
+                                <i class="fab fa-react fa-spin-pulse text-xs opacity-70"></i> React.js
+                            </span>
+                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                                Expanding my frontend toolkit to build dynamic, component-driven user interfaces for my web applications.
+                            </div>
+                        </div>
+                        <div class="relative group cursor-default w-full">
+                            <span class="flex justify-center w-full px-5 py-3 bg-brand-bg border border-brand-accent/50 rounded-xl text-sm font-medium text-zinc-400 group-hover:text-brand-heading group-hover:border-zinc-400 bouncy-hover items-center gap-2">
+                                <i class="fas fa-network-wired fa-fade text-xs opacity-70"></i> IoT Architecture
+                            </span>
+                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
+                                Learning how to connect embedded devices securely to cloud databases and live dashboards for real-time monitoring.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="py-24 border-b border-brand-border">
+                <div class="mb-12 text-pop-up">
+                    <h2 class="text-3xl font-bold tracking-tight text-brand-heading mb-3">Selected Projects</h2>
+                    <p class="text-brand-text font-light">Click on a project to view detailed documentation and outcomes.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-pop-up delay-100">
+                    
+                    <!-- Project Card 1: Flowgrid -->
+                    <div onclick="showProject('flowgrid')" class="group cursor-pointer project-box chamfer-lg p-8 bouncy-hover flex flex-col h-full text-left">
+                        <div class="flex justify-between items-start mb-6">
+                            <i class="fas fa-server text-2xl text-zinc-400 group-hover:text-zinc-100 transition-colors"></i>
+                            <span class="text-xs font-mono uppercase tracking-wider text-zinc-500">Hackathon / Web Dev</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-heading mb-3 group-hover:text-white transition-colors">Flowgrid</h3>
+                        <p class="text-brand-text font-light leading-relaxed mb-6 flex-grow">
+                            A smart, voice-controlled web app designed to help hospital staff quickly coordinate beds, doctors, and equipment without looking at a screen.
+                        </p>
+                        <span class="inline-flex items-center text-sm font-semibold text-zinc-300 group-hover:text-white transition-colors">
+                            View Project <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                    </div>
+
+                    <!-- Project Card 2: Sensored BeyondX -->
+                    <div onclick="showProject('sensored')" class="group cursor-pointer project-box chamfer-lg p-8 bouncy-hover flex flex-col h-full text-left">
+                        <div class="flex justify-between items-start mb-6">
+                            <i class="fas fa-microchip text-2xl text-zinc-400 group-hover:text-zinc-100 transition-colors"></i>
+                            <span class="text-xs font-mono uppercase tracking-wider text-zinc-500">Hardware / Aviation</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-heading mb-3 group-hover:text-white transition-colors">ESP32 Aviation Safety System</h3>
+                        <p class="text-brand-text font-light leading-relaxed mb-6 flex-grow">
+                            An automated hardware prototype that prevents airplane crashes by actively measuring distance to the ground and automatically adjusting wing flaps.
+                        </p>
+                        <span class="inline-flex items-center text-sm font-semibold text-zinc-300 group-hover:text-white transition-colors">
+                            View Project <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Future Aspirations & Goals Section -->
+            <section id="goals" class="py-24 text-pop-up delay-300">
+                <div class="mb-10">
+                    <h2 class="text-3xl font-bold tracking-tight text-brand-heading mb-3">Future Aspirations & Goals</h2>
+                    <p class="text-brand-text font-light">Where I am heading next in my tech journey.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-brand-card border border-brand-border p-8 chamfer-lg bouncy-hover">
+                        <div class="bg-zinc-800/50 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-brand-heading">
+                            <i class="fas fa-rocket text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-heading mb-2">Advancing Embedded</h3>
+                        <p class="text-brand-text text-sm font-light leading-relaxed">
+                            Diving into RTOS and advanced hardware architectures for fail-safe automation tools.
+                        </p>
+                    </div>
+
+                    <div class="bg-brand-card border border-brand-border p-8 chamfer-lg bouncy-hover">
+                        <div class="bg-zinc-800/50 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-brand-heading">
+                            <i class="fas fa-laptop-code text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-heading mb-2">Full-Stack AI</h3>
+                        <p class="text-brand-text text-sm font-light leading-relaxed">
+                            Deploying AI models within seamless, user-friendly SaaS platforms like Flowgrid.
+                        </p>
+                    </div>
+
+                    <div class="bg-brand-card border border-brand-border p-8 chamfer-lg bouncy-hover">
+                        <div class="bg-zinc-800/50 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-brand-heading">
+                            <i class="fas fa-globe text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-heading mb-2">Tech for Good</h3>
+                        <p class="text-brand-text text-sm font-light leading-relaxed">
+                            Engineering cross-functional solutions that have a positive impact on human lives.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PROJECT DETAIL VIEWS (Hidden by default)   -->
+    <!-- ========================================== -->
+    
+    <div id="project-detail-view" class="hidden flex-grow fade-in w-full">
+        <main class="max-w-4xl mx-auto px-6 md:px-12 py-16">
+            
+            <button onclick="goHome()" class="mb-12 inline-flex items-center text-sm font-medium text-zinc-400 hover:text-brand-heading transition-colors group">
+                <i class="fas fa-arrow-left mr-2 transform group-hover:-translate-x-1 transition-transform"></i> Back to Home
+            </button>
+
+            <!-- Flowgrid Detail -->
+            <div id="detail-flowgrid" class="hidden project-content">
+                <div class="mb-6 flex items-center gap-3">
+                    <span class="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-mono rounded-full">Web Dev</span>
+                    <span class="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-mono rounded-full">Hackathon</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold text-brand-heading mb-6">Flowgrid (ADG Hackgrid)</h1>
+                
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <a href="https://github.com/mr-aadigupta/flowgrid" target="_blank" class="px-5 py-2.5 bg-zinc-800 border border-zinc-700 text-white text-sm font-medium rounded-full hover:bg-zinc-700 bouncy-hover flex items-center gap-2">
+                        <i class="fab fa-github text-lg"></i> View Source Code
+                    </a>
+                    <a href="https://flowgrid-1wmt.onrender.com/" target="_blank" class="px-5 py-2.5 bg-zinc-100 text-zinc-950 text-sm font-semibold rounded-full hover:bg-white bouncy-hover flex items-center gap-2">
+                        <i class="fas fa-external-link-alt"></i> Visit Live Site
+                    </a>
+                </div>
+
+                <div class="prose prose-invert prose-zinc max-w-none text-brand-text font-light leading-relaxed space-y-6">
+                    <p class="text-xl text-zinc-200"><strong>What it is:</strong> Flowgrid is a smart, voice-activated assistant built to help busy hospitals manage their resources without the chaos of endless phone calls and paperwork.</p>
+                    
+                    <h3 class="text-2xl font-medium text-brand-heading mt-8 mb-4 border-b border-zinc-800 pb-2">The Problem</h3>
+                    <p>In emergency situations, hospital staff waste precious time searching databases or calling around to find out if a bed, a specific specialist (like a cardiologist), or a piece of equipment is currently available. We wanted to solve this operational nightmare.</p>
+
+                    <h3 class="text-2xl font-medium text-brand-heading mt-8 mb-4 border-b border-zinc-800 pb-2">How It Works</h3>
+                    <p>Instead of clicking through complicated menus, a nurse or doctor simply speaks into the system. For example, they can say: <em class="text-zinc-300">"Emergency. We need a cardiologist, a bed in the CICU, and an ECG machine."</em></p>
+                    <ul class="list-disc pl-5 space-y-2 mt-2">
+                        <li><strong>Speech Recognition:</strong> The system captures the voice and translates it into editable text using an AI model (faster-whisper).</li>
+                        <li><strong>Confirmation:</strong> The staff reviews the text on the screen to ensure the AI heard them correctly, keeping humans in control.</li>
+                        <li><strong>Automated Search:</strong> Once confirmed, the system's "Multi-Agent" backend acts like several digital assistants working at once. One checks bed availability, another finds the doctor, and another locates the equipment.</li>
+                        <li><strong>The Result:</strong> It instantly pairs up a complete, compatible set of resources. If the hospital is out of ECG machines, the system will explicitly tell the staff exactly what is missing so they can plan accordingly.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-medium text-brand-heading mt-8 mb-4 border-b border-zinc-800 pb-2">Development Background</h3>
+                    <p>We built this prototype during the <strong>ADG Hackgrid hackathon</strong>. After initially planning a finance project, we pivoted to healthcare. I helped develop the Python and Streamlit backend, integrating the speech AI and building a simulated hospital database to prove the concept works. Our goal was to create a Software-as-a-Service (SaaS) tool that hospitals could easily adopt to save time and lives.</p>
+                </div>
+            </div>
+
+            <!-- Sensored BeyondX Detail -->
+            <div id="detail-sensored" class="hidden project-content">
+                <div class="mb-6 flex items-center gap-3">
+                    <span class="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-mono rounded-full">Hardware</span>
+                    <span class="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-mono rounded-full">Embedded Systems</span>
+                    <span class="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-mono rounded-full">Hackathon</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold text-brand-heading mb-6">ESP32 Aviation GPWS & Auto-Flap Landing System</h1>
+                
+                <div class="prose prose-invert prose-zinc max-w-none text-brand-text font-light leading-relaxed space-y-8">
+                    <p class="text-xl text-zinc-200">Our team, <strong>Fantastic Four</strong>, secured the <strong>second position (as freshers)</strong> in the Sensored BeyondX hackathon organized by the TEC club at VIT Vellore.</p>
+                    
+                    <div>
+                        <h3 class="text-2xl font-medium text-brand-heading mb-3">1. The Problem: Planes Crashing into the Ground</h3>
+                        <p>Sometimes, perfectly good airplanes crash into the ground or water simply because the pilot gets confused in bad weather, fog, or the dark. This is called CFIT (Controlled Flight Into Terrain). Standard plane sensors (barometers) can get confused by weather changes and aren't accurate enough when the plane is just feet away from hitting the ground.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-medium text-brand-heading mb-3">2. Our Solution: A Smart Safety Net</h3>
+                        <p>We built a hardware system using an ESP32 microchip that acts as an automatic co-pilot to stop these crashes. It uses two ways to measure height and tilt to keep the plane safe:</p>
+                        <ul class="list-disc pl-5 space-y-2 mt-4 text-zinc-300">
+                            <li><strong>Double-Checking Height:</strong> We combined a standard pressure sensor (for flying high) with an ultrasonic radar (like a bat uses) to measure the exact distance to the ground with pinpoint accuracy when the plane gets low.</li>
+                            <li><strong>Watching the Tilt:</strong> An accelerometer constantly monitors the angle of the plane to see if it's nose-diving dangerously.</li>
+                            <li><strong>Automatic Life-Saving Action:</strong> 
+                                If the system realizes the plane is diving too fast or too steeply near the ground, it doesn't just warn the pilot—it acts. It instantly flashes red lights, sounds a loud emergency siren, and <strong>automatically forces the wing flaps into a safe position (0°)</strong> to help prevent a crash.
+                            </li>
+                            <li><strong>Smooth Landing Assist:</strong> If the plane is coming in at a safe angle, the system automatically adjusts the flaps (to 45° then 90°) to help it land smoothly, taking work off the pilot's plate.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Video Slot -->
+                    <div class="mt-12">
+                        <h3 class="text-2xl font-medium text-brand-heading mb-4">Project Demonstration Video</h3>
+                        <div class="w-full aspect-video bg-brand-bg border border-brand-border chamfer-lg flex flex-col items-center justify-center group relative overflow-hidden cursor-pointer">
+                            <video class="w-full h-full object-cover" controls>
+                                <source src="demo.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <p class="text-sm text-zinc-500 text-center mt-2">Overall performance video of the automated flap system and warning alarms.</p>
+                    </div>
+
+                    <div class="mt-12">
+                        <h3 class="text-2xl font-medium text-brand-heading mb-4">Prototype Outputs & Team</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Existing Output Photos -->
+                            <figure class="m-0">
+                                <img src="img1.png" alt="Hazard Override Output" class="w-full chamfer-lg border border-brand-border bouncy-hover cursor-pointer">
+                                <figcaption class="text-sm text-center text-zinc-500 mt-2">Hazard Override (Pitch anomaly detected)</figcaption>
+                            </figure>
+                            <figure class="m-0">
+                                <img src="img2.jpeg" alt="Landing Mechanism" class="w-full chamfer-lg border border-brand-border bouncy-hover cursor-pointer">
+                                <figcaption class="text-sm text-center text-zinc-500 mt-2">Landing Phase (< 10cm)</figcaption>
+                            </figure>
+                            <figure class="m-0">
+                                <img src="img3.jpeg" alt="Approach Mechanism" class="w-full chamfer-lg border border-brand-border bouncy-hover cursor-pointer">
+                                <figcaption class="text-sm text-center text-zinc-500 mt-2">Approach Phase (10-30cm)</figcaption>
+                            </figure>
+                            <figure class="m-0">
+                                <img src="img4.jpeg" alt="Cruising Mechanism" class="w-full chamfer-lg border border-brand-border bouncy-hover cursor-pointer">
+                                <figcaption class="text-sm text-center text-zinc-500 mt-2">Cruising Phase (> 30cm)</figcaption>
+                            </figure>
+
+                            <!-- NEW Team Photos -->
+                            <figure class="m-0 sm:col-span-1">
+                                <img src="team.jpg" alt="Team Fantastic Four" class="w-full chamfer-lg border border-brand-border bouncy-hover cursor-pointer">
+                                <figcaption class="text-sm text-center text-zinc-500 mt-2">Members of the Team Fantastic Four</figcaption>
+                            </figure>
+                            <figure class="m-0 sm:col-span-1">
+                                <img src="win.png" alt="Hackathon Win" class="w-full chamfer-lg border border-brand-border bouncy-hover cursor-pointer">
+                                <figcaption class="text-sm text-center text-zinc-500 mt-2">The Winning Moment!!</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <!-- Contact & Resume Section (Visible only on main view) -->
+    <section id="contact" class="w-full bg-brand-bg py-24 border-t border-brand-border">
+        <div class="max-w-3xl mx-auto px-6 md:px-12 text-center text-pop-up">
+            <h2 class="text-3xl font-bold tracking-tight text-brand-heading mb-6">Let's Connect</h2>
+            <p class="text-brand-text font-light mb-8 leading-relaxed">
+                I'm currently seeking new opportunities and projects where I can apply my skills in software and hardware development. My inbox is always open.
+            </p>
+            
+            <!-- Contact Details -->
+            <div class="mb-10 flex flex-col sm:flex-row items-center justify-center gap-6 text-zinc-400 font-medium">
+                <a href="mailto:aadibrjmd@gmail.com" class="hover:text-brand-heading transition-colors flex items-center gap-2 group">
+                    <i class="fas fa-envelope text-zinc-500 group-hover:text-zinc-100 transition-colors"></i> aadibrjmd@gmail.com
+                </a>
+                <span class="hidden sm:inline text-zinc-700">|</span>
+                <a href="tel:+917496028070" class="hover:text-brand-heading transition-colors flex items-center gap-2 group">
+                    <i class="fas fa-phone text-zinc-500 group-hover:text-zinc-100 transition-colors"></i> +91 7496028070
+                </a>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 text-pop-up delay-100">
+                <a href="mailto:aadibrjmd@gmail.com" class="px-8 py-3.5 bg-zinc-100 text-zinc-950 font-semibold rounded-full hover:bg-white transition-colors w-full sm:w-auto bouncy-hover">
+                    Say Hello
+                </a>
+                <a href="resume.pdf" class="px-8 py-3.5 border border-brand-border text-brand-heading font-medium rounded-full hover:bg-brand-card transition-colors w-full sm:w-auto group bouncy-hover">
+                    <i class="fas fa-file-pdf mr-2 text-zinc-400 group-hover:text-zinc-100 transition-colors"></i> View Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="w-full py-8 border-t border-brand-border text-center text-sm font-medium text-zinc-500 mt-auto bg-brand-bg z-10 relative">
+        <p>Built by Aadi Gupta &copy; 2026. Designed with a minimalist approach.</p>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mainView = document.getElementById('main-view');
+        const contactSection = document.getElementById('contact');
+        const projectDetailView = document.getElementById('project-detail-view');
+        const projectContents = document.querySelectorAll('.project-content');
+
+        // Mobile Menu Toggle
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        function closeMobileMenu() {
+            if(mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+
+        // SPA Navigation Functions
+        function showProject(projectId) {
+            if (!mainView || !contactSection || !projectDetailView) return;
+
+            // Hide main view and contact
+            mainView.classList.add('hidden');
+            contactSection.classList.add('hidden');
+            
+            // Hide all project details first
+            projectContents.forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show the container and specific project
+            projectDetailView.classList.remove('hidden');
+            const targetProject = document.getElementById(`detail-${projectId}`);
+            if(targetProject) {
+                targetProject.classList.remove('hidden');
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goHome() {
+            if (!mainView || !contactSection || !projectDetailView) return;
+
+            // Hide project detail view
+            projectDetailView.classList.add('hidden');
+            
+            // Show main view and contact
+            mainView.classList.remove('hidden');
+            contactSection.classList.remove('hidden');
+        }
+
+        // Scroll Animation Observer
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.text-pop-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
