@@ -101,6 +101,47 @@
             border-color: #a3874e; /* Sunlight glow */
             box-shadow: inset 2px 2px 15px rgba(255, 220, 120, 0.1), 0 10px 30px -10px rgba(0,0,0,0.6);
         }
+
+        /* Overlapping Drawing Cards */
+        .drawing-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 0 4rem 0;
+        }
+        .drawing-card {
+            width: 160px; /* Increased base width */
+            aspect-ratio: 1 / 1; /* Squarer ratio */
+            border-radius: 12px;
+            object-fit: cover;
+            margin-left: -70px; /* Increased negative margin for overlap */
+            transition: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: -10px 0 20px rgba(0,0,0,0.6);
+            filter: brightness(0.6);
+            cursor: pointer;
+            position: relative;
+        }
+        .drawing-card:first-child {
+            margin-left: 0;
+        }
+        .drawing-card:hover {
+            transform: translateY(-25px) scale(1.35); /* Zoom and pop up */
+            filter: brightness(1.1);
+            z-index: 10;
+            margin-right: 50px; /* Creates space around the hovered card */
+        }
+        .drawing-container:hover .drawing-card:not(:hover) {
+            filter: brightness(0.3); /* Dims the cards not being hovered */
+            transform: scale(0.95);
+        }
+        
+        /* Adjust drawing cards for mobile */
+        @media (max-width: 768px) {
+            .drawing-card {
+                width: 90px;
+                margin-left: -40px;
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-zinc-800 selection:text-white flex flex-col min-h-screen">
@@ -148,36 +189,76 @@
     <!-- MAIN VIEW (Home, About, Projects, Skills)  -->
     <!-- ========================================== -->
     <div id="main-view" class="flex-grow">
-        <main class="max-w-5xl mx-auto px-6 md:px-12">
+        <main class="max-w-7xl mx-auto px-6 md:px-12">
 
             <!-- Hero / About Section -->
-            <section id="about" class="py-20 md:py-32 grid grid-cols-1 md:grid-cols-12 gap-12 items-center border-b border-brand-border">
-                <div class="md:col-span-7 space-y-6 order-2 md:order-1 text-pop-up">
-                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-brand-heading leading-tight">
-                        Hi, I'm Aadi Gupta. <br>
-                        <span class="text-zinc-500 font-medium text-2xl md:text-4xl">B.Tech Student & Developer.</span>
-                    </h1>
-                    <div class="text-base md:text-lg text-brand-text leading-relaxed font-light space-y-4 text-pop-up delay-100">
-                        <p>
-                            I am currently pursuing my <strong>B.Tech degree (Class of 2026)</strong> at the <strong>Vellore Institute of Technology (VIT)</strong>, Vellore. 
-                        </p>
-                        <p>
-                            I was born and raised in Jhajjar, Haryana, where I completed my early schooling up to the 10th grade. I then moved to Delhi to complete my 11th and 12th grades under the CBSE board, which shaped my analytical foundation.
-                        </p>
-                        <p>
-                            I have always had a deep love for coding. My core interests lie in building robust software solutions and exploring the bridge between software and hardware through sensor integration and hardware prototyping.
-                        </p>
+            <section id="about" class="py-20 md:py-32 border-b border-brand-border">
+                
+                <!-- Intro & Image Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                    <div class="md:col-span-7 space-y-6 order-2 md:order-1 text-pop-up">
+                        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-brand-heading leading-tight">
+                            Hi, I'm Aadi Gupta. <br>
+                            <span class="text-zinc-500 font-medium text-2xl md:text-4xl">B.Tech Student & Developer.</span>
+                        </h1>
+                        <div class="text-base md:text-lg text-brand-text leading-relaxed font-light space-y-4 text-pop-up delay-100">
+                            <p>
+                                I am currently pursuing my <strong>B.Tech degree (Class of 2030)</strong> at the <strong>Vellore Institute of Technology (VIT)</strong>, Vellore. 
+                            </p>
+                            <p>
+                                I was born and raised in Jhajjar, Haryana, where I completed my early schooling up to the 10th grade at R.E.D. Senior Secondary School. I then moved to Delhi to complete my 11th and 12th grades at James Convent School, Nangloi under the CBSE board, which shaped my analytical foundation.
+                            </p>
+                            <p>
+                                I have always had a deep love for coding. My core interests lie in building robust software solutions and exploring the bridge between software and hardware through sensor integration and hardware prototyping. 
+                            </p>
+                            
+                            <!-- The 3 Pointers -->
+                            <div class="pt-2">
+                                <p class="text-zinc-200 mb-3 text-sm font-medium uppercase tracking-wider">A bit more about me:</p>
+                                <ul class="flex flex-wrap gap-3">
+                                    <li class="px-4 py-1.5 bg-brand-card/50 border border-brand-border rounded-full text-sm text-zinc-300 flex items-center gap-2">
+                                        <i class="fas fa-search text-zinc-500"></i> Curious
+                                    </li>
+                                    <li class="px-4 py-1.5 bg-brand-card/50 border border-brand-border rounded-full text-sm text-zinc-300 flex items-center gap-2">
+                                        <i class="fas fa-ear-listen text-zinc-500"></i> Good Listener
+                                    </li>
+                                    <li class="px-4 py-1.5 bg-brand-card/50 border border-brand-border rounded-full text-sm text-zinc-300 flex items-center gap-2">
+                                        <i class="fas fa-lightbulb text-zinc-500"></i> Open to New Ideas
+                                    </li>
+                                </ul>
+                            </div>
+                            <p class="text-zinc-200 pt-2">
+                                When I'm not coding, my favorite hobby is <strong>drawing and sketching</strong>, which fuels my creativity.
+                            </p>
+                        </div>
+                        <div class="flex gap-4 pt-4 text-pop-up delay-200">
+                            <a href="#contact" class="px-6 py-3 bg-zinc-100 text-zinc-950 font-semibold rounded-full hover:bg-white bouncy-hover">Contact Me</a>
+                            <a href="#projects" class="px-6 py-3 border border-brand-border text-brand-heading font-medium rounded-full hover:bg-brand-card bouncy-hover">View Projects</a>
+                        </div>
                     </div>
-                    <div class="flex gap-4 pt-4 text-pop-up delay-200">
-                        <a href="#contact" class="px-6 py-3 bg-zinc-100 text-zinc-950 font-semibold rounded-full hover:bg-white bouncy-hover">Contact Me</a>
-                        <a href="#projects" class="px-6 py-3 border border-brand-border text-brand-heading font-medium rounded-full hover:bg-brand-card bouncy-hover">View Projects</a>
+                    <div class="md:col-span-5 order-1 md:order-2 flex justify-center md:justify-end text-pop-up delay-300">
+                        <div class="w-full max-w-[380px] aspect-square relative overflow-hidden chamfer-lg bg-brand-card shadow-2xl border border-brand-border">
+                            <img src="ag.jpg" alt="Aadi Gupta" onerror="this.src='https://placehold.co/500x500/18181b/fafafa?text=AG'" class="w-full h-full object-cover object-center transition-all duration-500">
+                        </div>
                     </div>
                 </div>
-                <div class="md:col-span-5 order-1 md:order-2 flex justify-center md:justify-end text-pop-up delay-300">
-                    <div class="w-full max-w-[280px] aspect-square relative overflow-hidden chamfer-lg bg-brand-card shadow-2xl border border-brand-border">
-                        <img src="ag.jpg" alt="Aadi Gupta" onerror="this.src='https://placehold.co/400x400/18181b/fafafa?text=AG'" class="w-full h-full object-cover object-center transition-all duration-500">
+
+                <!-- Drawing & Sketching Carousel Section -->
+                <div class="mt-24 text-pop-up delay-400 text-center w-full">
+                    <h3 class="text-2xl font-bold tracking-tight text-brand-heading mb-2">My Sketches & Drawings</h3>
+                    <p class="text-brand-text font-light mb-4">Hover over the cards to zoom and explore my creative hobby.</p>
+                    
+                    <div class="drawing-container">
+                        <img src="a.jpg" class="drawing-card border border-zinc-700" alt="Drawing 1">
+                        <img src="b.webp" class="drawing-card border border-zinc-700" alt="Drawing 2">
+                        <img src="c.webp" class="drawing-card border border-zinc-700" alt="Drawing 3">
+                        <img src="d.jpg" class="drawing-card border border-zinc-700" alt="Drawing 4">
+                        <img src="e.jpg" class="drawing-card border border-zinc-700" alt="Drawing 5">
+                        <img src="f.jpg" class="drawing-card border border-zinc-700" alt="Drawing 6">
+                        <img src="g.jpg" class="drawing-card border border-zinc-700" alt="Drawing 7">
                     </div>
                 </div>
+                
             </section>
 
             <!-- Skills Section -->
@@ -187,7 +268,7 @@
                     <p class="text-brand-text font-light">Languages, tools, and methodologies I work with. Hover for details.</p>
                 </div>
                 
-                <div class="flex flex-wrap justify-center gap-4 text-pop-up delay-100">
+                <div class="flex flex-wrap justify-center gap-4 text-pop-up delay-100 max-w-4xl mx-auto">
                     
                     <!-- Skill with Tooltip -->
                     <div class="relative group cursor-default">
@@ -248,7 +329,7 @@
 
                 </div>
 
-                <div class="mt-12 text-pop-up delay-200">
+                <div class="mt-12 text-pop-up delay-200 max-w-5xl mx-auto">
                     <h3 class="text-xl font-semibold tracking-tight text-brand-heading mb-4 text-center">Currently Learning & Exploring</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
                         <div class="relative group cursor-default w-full">
@@ -281,17 +362,17 @@
 
             <!-- Projects Section -->
             <section id="projects" class="py-24 border-b border-brand-border">
-                <div class="mb-12 text-pop-up">
+                <div class="mb-12 text-pop-up text-center md:text-left">
                     <h2 class="text-3xl font-bold tracking-tight text-brand-heading mb-3">Selected Projects</h2>
                     <p class="text-brand-text font-light">Click on a project to view detailed documentation and outcomes.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-pop-up delay-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 text-pop-up delay-100">
                     
                     <!-- Project Card 1: Flowgrid -->
                     <div onclick="showProject('flowgrid')" class="group cursor-pointer project-box chamfer-lg p-8 bouncy-hover flex flex-col h-full text-left">
                         <div class="flex justify-between items-start mb-6">
-                            <i class="fas fa-server text-2xl text-zinc-400 group-hover:text-zinc-100 transition-colors"></i>
+                            <i class="fas fa-server text-3xl text-zinc-400 group-hover:text-zinc-100 transition-colors"></i>
                             <span class="text-xs font-mono uppercase tracking-wider text-zinc-500">Hackathon / Web Dev</span>
                         </div>
                         <h3 class="text-2xl font-bold text-brand-heading mb-3 group-hover:text-white transition-colors">Flowgrid</h3>
@@ -306,7 +387,7 @@
                     <!-- Project Card 2: Sensored BeyondX -->
                     <div onclick="showProject('sensored')" class="group cursor-pointer project-box chamfer-lg p-8 bouncy-hover flex flex-col h-full text-left">
                         <div class="flex justify-between items-start mb-6">
-                            <i class="fas fa-microchip text-2xl text-zinc-400 group-hover:text-zinc-100 transition-colors"></i>
+                            <i class="fas fa-microchip text-3xl text-zinc-400 group-hover:text-zinc-100 transition-colors"></i>
                             <span class="text-xs font-mono uppercase tracking-wider text-zinc-500">Hardware / Aviation</span>
                         </div>
                         <h3 class="text-2xl font-bold text-brand-heading mb-3 group-hover:text-white transition-colors">ESP32 Aviation Safety System</h3>
@@ -323,7 +404,7 @@
 
             <!-- Future Aspirations & Goals Section -->
             <section id="goals" class="py-24 text-pop-up delay-300">
-                <div class="mb-10">
+                <div class="mb-10 text-center md:text-left">
                     <h2 class="text-3xl font-bold tracking-tight text-brand-heading mb-3">Future Aspirations & Goals</h2>
                     <p class="text-brand-text font-light">Where I am heading next in my tech journey.</p>
                 </div>
@@ -369,7 +450,7 @@
     <!-- ========================================== -->
     
     <div id="project-detail-view" class="hidden flex-grow fade-in w-full">
-        <main class="max-w-4xl mx-auto px-6 md:px-12 py-16">
+        <main class="max-w-5xl mx-auto px-6 md:px-12 py-16">
             
             <button onclick="goHome()" class="mb-12 inline-flex items-center text-sm font-medium text-zinc-400 hover:text-brand-heading transition-colors group">
                 <i class="fas fa-arrow-left mr-2 transform group-hover:-translate-x-1 transition-transform"></i> Back to Home
@@ -475,7 +556,7 @@
                                 <figcaption class="text-sm text-center text-zinc-500 mt-2">Cruising Phase (> 30cm)</figcaption>
                             </figure>
 
-                            <!-- NEW Team Photos -->
+                            <!-- Team Photos -->
                             <figure class="m-0 sm:col-span-1">
                                 <img src="team.jpg" alt="Team Fantastic Four" class="w-full chamfer-lg border border-brand-border bouncy-hover cursor-pointer">
                                 <figcaption class="text-sm text-center text-zinc-500 mt-2">Members of the Team Fantastic Four</figcaption>
