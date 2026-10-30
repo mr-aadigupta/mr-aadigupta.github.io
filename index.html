@@ -677,40 +677,82 @@
             }
         }
 
-        // SPA Navigation Functions
+        // SPA Navigation Functions with Browser History API
         function showProject(projectId) {
             if (!mainView || !contactSection || !projectDetailView) return;
 
-            // Hide main view and contact
+            // Update browser history state
+            history.pushState({ view: 'project', id: projectId }, '', `#project-${projectId}`);
+
+            renderProjectView(projectId);
+        }
+
+        function goHome(fromHistory = false) {
+            if (!mainView || !contactSection || !projectDetailView) return;
+
+            // Only push to history if not triggered by the popstate event
+            if (!fromHistory) {
+                history.pushState({ view: 'home' }, '', window.location.pathname);
+            }
+
+            renderHomeView();
+        }
+
+        // Helper functions to handle actual DOM updates
+        function renderProjectView(projectId) {
             mainView.classList.add('hidden');
             contactSection.classList.add('hidden');
             
-            // Hide all project details first
             projectContents.forEach(content => {
                 content.classList.add('hidden');
             });
             
-            // Show the container and specific project
             projectDetailView.classList.remove('hidden');
             const targetProject = document.getElementById(`detail-${projectId}`);
             if(targetProject) {
                 targetProject.classList.remove('hidden');
             }
             
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function goHome() {
-            if (!mainView || !contactSection || !projectDetailView) return;
-
-            // Hide project detail view
+        function renderHomeView() {
             projectDetailView.classList.add('hidden');
-            
-            // Show main view and contact
             mainView.classList.remove('hidden');
             contactSection.classList.remove('hidden');
+            
+            // Optionally, scroll smoothly back to the projects section
+            const projectsSection = document.getElementById('projects');
+            if (projectsSection) {
+                 projectsSection.scrollIntoView({ behavior: 'smooth' });
+            }
         }
+
+        // Listen for browser back/forward buttons
+        window.addEventListener('popstate', (event) => {
+            const state = event.state;
+            
+            // If there's no state (initial load) or state is 'home', go to home view
+            if (!state || state.view === 'home') {
+                renderHomeView();
+            } else if (state.view === 'project') {
+                // If back/forward button navigates to a project state, render it
+                renderProjectView(state.id);
+            }
+        });
+
+        // Initialize state on first load based on URL hash (optional, allows direct links to projects)
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if (hash.startsWith('#project-')) {
+                const projectId = hash.replace('#project-', '');
+                // Replace initial state so hitting 'back' leaves the site cleanly if they landed directly on a project
+                history.replaceState({ view: 'project', id: projectId }, '', hash); 
+                renderProjectView(projectId);
+            } else {
+                history.replaceState({ view: 'home' }, '', window.location.pathname + window.location.search);
+            }
+        });
 
         // Project Box Cursor Spotlight Effect
         document.querySelectorAll('.project-box').forEach(box => {
