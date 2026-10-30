@@ -133,7 +133,6 @@
         .project-box:hover {
             border-color: #a1a1aa; /* Silvery/Zinc glow */
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7), inset 0 0 20px rgba(255,255,255,0.03);
-            /* Bouncy hover is handled by the tailwind class, but we ensure shadow/border match here */
         }
 
         /* Expanding Drawing Gallery */
@@ -304,60 +303,60 @@
                     <p class="text-brand-text font-light">Languages, tools, and methodologies I work with. Hover for details.</p>
                 </div>
                 
-                <div class="flex flex-wrap justify-center gap-4 text-pop-up delay-100 max-w-4xl mx-auto">
+                <div class="flex flex-wrap justify-center gap-4 text-pop-up delay-100 max-w-5xl mx-auto">
                     
                     <!-- Skill with Tooltip -->
                     <div class="relative group cursor-default">
-                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Python</span>
+                        <span class="px-7 py-3.5 md:px-8 md:py-4 bg-brand-card border border-brand-border rounded-full text-base md:text-lg font-semibold text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Python</span>
                         <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                             My primary language for building backend logic, data parsing, and AI integrations (like faster-whisper).
                         </div>
                     </div>
 
                     <div class="relative group cursor-default">
-                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">HTML5 & CSS3</span>
+                        <span class="px-7 py-3.5 md:px-8 md:py-4 bg-brand-card border border-brand-border rounded-full text-base md:text-lg font-semibold text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">HTML5 & CSS3</span>
                         <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                             Used to structure and beautifully style the visual front-end of my web applications and portfolios.
                         </div>
                     </div>
 
                     <div class="relative group cursor-default">
-                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Git & GitHub</span>
+                        <span class="px-7 py-3.5 md:px-8 md:py-4 bg-brand-card border border-brand-border rounded-full text-base md:text-lg font-semibold text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Git & GitHub</span>
                         <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                             Version control essentials for tracking code changes and collaborating efficiently with my hackathon teams.
                         </div>
                     </div>
 
                     <div class="relative group cursor-default">
-                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Arduino & ESP32</span>
+                        <span class="px-7 py-3.5 md:px-8 md:py-4 bg-brand-card border border-brand-border rounded-full text-base md:text-lg font-semibold text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Arduino & ESP32</span>
                         <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                             Microcontrollers I program (in C/C++) to read sensors, control motors, and act as the brain for my hardware projects.
                         </div>
                     </div>
 
                     <div class="relative group cursor-default">
-                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Hardware Prototyping</span>
+                        <span class="px-7 py-3.5 md:px-8 md:py-4 bg-brand-card border border-brand-border rounded-full text-base md:text-lg font-semibold text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Hardware Prototyping</span>
                         <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                             Building real, physical systems on breadboards, managing power distribution, and assembling rovers and safety tools.
                         </div>
                     </div>
 
                     <div class="relative group cursor-default">
-                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Sensor Integration</span>
+                        <span class="px-7 py-3.5 md:px-8 md:py-4 bg-brand-card border border-brand-border rounded-full text-base md:text-lg font-semibold text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Sensor Integration</span>
                         <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                             Connecting physical sensors (like ultrasonic radars and barometers) to code so computers can understand the real world.
                         </div>
                     </div>
 
                     <div class="relative group cursor-default">
-                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">OrCAD X</span>
+                        <span class="px-7 py-3.5 md:px-8 md:py-4 bg-brand-card border border-brand-border rounded-full text-base md:text-lg font-semibold text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">OrCAD X</span>
                         <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                             Designing and simulating electronic circuits and PCB layouts for custom hardware projects.
                         </div>
                     </div>
 
                     <div class="relative group cursor-default">
-                        <span class="px-5 py-2.5 bg-brand-card border border-brand-border rounded-full text-sm font-medium text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">SolidWorks</span>
+                        <span class="px-7 py-3.5 md:px-8 md:py-4 bg-brand-card border border-brand-border rounded-full text-base md:text-lg font-semibold text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">SolidWorks</span>
                         <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                             Creating 3D models and mechanical designs for structural components, chassis, and functional parts.
                         </div>
@@ -365,28 +364,28 @@
 
                 </div>
 
-                <div class="mt-12 text-pop-up delay-200 max-w-5xl mx-auto">
-                    <h3 class="text-xl font-semibold tracking-tight text-brand-heading mb-4 text-center">Currently Learning & Exploring</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                <div class="mt-16 text-pop-up delay-200 max-w-5xl mx-auto">
+                    <h3 class="text-xl font-semibold tracking-tight text-brand-heading mb-6 text-center">Currently Learning & Exploring</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
                         <div class="relative group cursor-default w-full">
-                            <span class="flex justify-center w-full px-5 py-3 bg-brand-bg border border-brand-accent/50 rounded-xl text-sm font-medium text-zinc-400 group-hover:text-brand-heading group-hover:border-zinc-400 bouncy-hover items-center gap-2">
-                                <i class="fas fa-microchip fa-fade text-xs opacity-70"></i> Edge AI / TinyML
+                            <span class="flex justify-center w-full px-6 py-4 bg-brand-bg border border-brand-accent/50 rounded-xl text-base md:text-lg font-semibold text-zinc-400 group-hover:text-brand-heading group-hover:border-zinc-400 bouncy-hover items-center gap-3">
+                                <i class="fas fa-microchip fa-fade text-sm opacity-70"></i> Edge AI / TinyML
                             </span>
                             <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                                 Exploring how to run machine learning models directly on microcontrollers to make hardware projects smarter locally.
                             </div>
                         </div>
                         <div class="relative group cursor-default w-full">
-                            <span class="flex justify-center w-full px-5 py-3 bg-brand-bg border border-brand-accent/50 rounded-xl text-sm font-medium text-zinc-400 group-hover:text-brand-heading group-hover:border-zinc-400 bouncy-hover items-center gap-2">
-                                <i class="fab fa-react fa-spin-pulse text-xs opacity-70"></i> React.js
+                            <span class="flex justify-center w-full px-6 py-4 bg-brand-bg border border-brand-accent/50 rounded-xl text-base md:text-lg font-semibold text-zinc-400 group-hover:text-brand-heading group-hover:border-zinc-400 bouncy-hover items-center gap-3">
+                                <i class="fab fa-react fa-spin-pulse text-sm opacity-70"></i> React.js
                             </span>
                             <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                                 Expanding my frontend toolkit to build dynamic, component-driven user interfaces for my web applications.
                             </div>
                         </div>
                         <div class="relative group cursor-default w-full">
-                            <span class="flex justify-center w-full px-5 py-3 bg-brand-bg border border-brand-accent/50 rounded-xl text-sm font-medium text-zinc-400 group-hover:text-brand-heading group-hover:border-zinc-400 bouncy-hover items-center gap-2">
-                                <i class="fas fa-network-wired fa-fade text-xs opacity-70"></i> IoT Architecture
+                            <span class="flex justify-center w-full px-6 py-4 bg-brand-bg border border-brand-accent/50 rounded-xl text-base md:text-lg font-semibold text-zinc-400 group-hover:text-brand-heading group-hover:border-zinc-400 bouncy-hover items-center gap-3">
+                                <i class="fas fa-network-wired fa-fade text-sm opacity-70"></i> IoT Architecture
                             </span>
                             <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-zinc-800 text-sm font-light text-zinc-200 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20 text-center shadow-xl leading-relaxed">
                                 Learning how to connect embedded devices securely to cloud databases and live dashboards for real-time monitoring.
@@ -435,7 +434,7 @@
 
                         <!-- Image Slot (Curved Corners) -->
                         <div class="w-full aspect-video mb-6 overflow-hidden rounded-2xl border border-zinc-800 relative bg-zinc-900">
-                            <img src="img2.jpeg" alt="Hardware Preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <img src="img2.jpegs" alt="Hardware Preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         </div>
 
                         <h3 class="text-2xl font-bold text-brand-heading mb-3 group-hover:text-white transition-colors">ESP32 Aviation Safety System</h3>
