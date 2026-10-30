@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aadi Gupta | Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2309090b'/><text x='50' y='68' font-size='52' font-weight='700' text-anchor='middle' fill='%23fafafa' font-family='Arial'>AG</text></svg>">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -36,6 +37,16 @@
     
     <style>
         body { font-family: 'Inter', sans-serif; }
+        /* Custom mouse pointer */
+        *, *::before, *::after {
+            cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 512 512'><path d='M129 112 C128 78 160 58 190 78 L435 268 C462 290 450 330 412 333 L330 333 C295 333 280 345 262 368 L215 430 C190 462 148 450 146 415 Z' fill='white' stroke='%2309090b' stroke-width='34' stroke-linejoin='round'/></svg>") 6 4, auto !important;
+        }
+
+        /* Pointer over clickable things (gold fill to match your project cards) */
+        a, button, [onclick], .cursor-pointer, .drawing-card, video {
+            cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 512 512'><path d='M129 112 C128 78 160 58 190 78 L435 268 C462 290 450 330 412 333 L330 333 C295 333 280 345 262 368 L215 430 C190 462 148 450 146 415 Z' fill='%23d4b26a' stroke='%2309090b' stroke-width='34' stroke-linejoin='round'/></svg>") 6 4, pointer !important;
+        }
+        
         .nav-link { position: relative; }
         .nav-link::after {
             content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background-color: #fafafa; transition: width 0.3s ease;
@@ -104,7 +115,7 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(
                 600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                rgba(255, 255, 255, 0.07),
+                rgba(255, 255, 255, 0.08),
                 transparent 40%
             );
             opacity: 0;
@@ -120,48 +131,51 @@
             opacity: 1; /* Show gradient on hover */
         }
         .project-box:hover {
-            border-color: #a1a1aa; /* Silvery/Zinc glow instead of yellow */
+            border-color: #a1a1aa; /* Silvery/Zinc glow */
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7), inset 0 0 20px rgba(255,255,255,0.03);
+            /* Bouncy hover is handled by the tailwind class, but we ensure shadow/border match here */
         }
 
-        /* Overlapping Drawing Cards */
+        /* Expanding Drawing Gallery */
         .drawing-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 3rem 0 4rem 0;
+            gap: 10px;
+            width: 100%;
+            height: 420px;
+            padding: 0;
+            margin-top: 2rem;
         }
         .drawing-card {
-            width: 160px; /* Increased base width */
-            aspect-ratio: 1 / 1; /* Squarer ratio */
-            border-radius: 12px;
+            flex: 1 1 0;          /* all cards share the full width equally */
+            min-width: 0;
+            width: auto;
+            height: 100%;
             object-fit: cover;
-            margin-left: -70px; /* Increased negative margin for overlap */
-            transition: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: -10px 0 20px rgba(0,0,0,0.6);
-            filter: brightness(0.6);
+            border-radius: 16px;
+            filter: brightness(0.55);
             cursor: pointer;
-            position: relative;
-        }
-        .drawing-card:first-child {
-            margin-left: 0;
+            transition: flex 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
         }
         .drawing-card:hover {
-            transform: translateY(-25px) scale(1.35); /* Zoom and pop up */
-            filter: brightness(1.1);
-            z-index: 10;
-            margin-right: 50px; /* Creates space around the hovered card */
+            flex: 5;              /* hovered card expands */
+            filter: brightness(1.05);
         }
         .drawing-container:hover .drawing-card:not(:hover) {
-            filter: brightness(0.3); /* Dims the cards not being hovered */
-            transform: scale(0.95);
+            filter: brightness(0.35);
         }
-        
-        /* Adjust drawing cards for mobile */
+
+        /* Mobile */
         @media (max-width: 768px) {
+            .drawing-container {
+                height: 260px;
+                gap: 6px;
+            }
             .drawing-card {
-                width: 90px;
-                margin-left: -40px;
+                border-radius: 10px;
+            }
+            .drawing-card:hover {
+                flex: 4;
             }
         }
     </style>
@@ -220,12 +234,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
                     <div class="md:col-span-7 space-y-6 order-2 md:order-1 text-pop-up">
                         <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-brand-heading leading-tight">
-                            Hi, I'm Aadi Gupta. <br>
+                            Hi, I'm <strong>Aadi Gupta</strong>. <br>
                             <span class="text-zinc-500 font-medium text-2xl md:text-4xl">B.Tech Student & Developer.</span>
                         </h1>
                         <div class="text-base md:text-lg text-brand-text leading-relaxed font-light space-y-4 text-pop-up delay-100">
                             <p>
-                                I am currently pursuing my <strong>B.Tech degree (Class of 2030)</strong> at the <strong>Vellore Institute of Technology (VIT)</strong>, Vellore. 
+                                I am currently pursuing my <strong>B.Tech-CSE degree (Class of '30)</strong> at the <strong>Vellore Institute of Technology (VIT)</strong>, Vellore. 
                             </p>
                             <p>
                                 I was born and raised in Jhajjar, Haryana, where I completed my early schooling up to the 10th grade at R.E.D. Senior Secondary School. I then moved to Delhi to complete my 11th and 12th grades at James Convent School, Nangloi under the CBSE board, which shaped my analytical foundation.
@@ -265,19 +279,19 @@
                     </div>
                 </div>
 
-                <!-- Drawing & Sketching Carousel Section -->
+                <!-- Drawing & Sketching Gallery Section -->
                 <div class="mt-24 text-pop-up delay-400 text-center w-full">
                     <h3 class="text-2xl font-bold tracking-tight text-brand-heading mb-2">My Sketches & Drawings</h3>
-                    <p class="text-brand-text font-light mb-4">Hover over the cards to zoom and explore my creative hobby.</p>
+                    <p class="text-brand-text font-light mb-4">Hover over the cards to expand and explore my creative hobby.</p>
                     
                     <div class="drawing-container">
-                        <img src="https://placehold.co/400x400/18181b/fafafa?text=Sketch+1" class="drawing-card border border-zinc-700" alt="Drawing 1">
-                        <img src="https://placehold.co/400x400/18181b/fafafa?text=Sketch+2" class="drawing-card border border-zinc-700" alt="Drawing 2">
-                        <img src="https://placehold.co/400x400/18181b/fafafa?text=Sketch+3" class="drawing-card border border-zinc-700" alt="Drawing 3">
-                        <img src="https://placehold.co/400x400/18181b/fafafa?text=Sketch+4" class="drawing-card border border-zinc-700" alt="Drawing 4">
-                        <img src="https://placehold.co/400x400/18181b/fafafa?text=Sketch+5" class="drawing-card border border-zinc-700" alt="Drawing 5">
-                        <img src="https://placehold.co/400x400/18181b/fafafa?text=Sketch+6" class="drawing-card border border-zinc-700" alt="Drawing 6">
-                        <img src="https://placehold.co/400x400/18181b/fafafa?text=Sketch+7" class="drawing-card border border-zinc-700" alt="Drawing 7">
+                        <img src="a.jpg" class="drawing-card border border-zinc-700" alt="Drawing 1">
+                        <img src="b.webp" class="drawing-card border border-zinc-700" alt="Drawing 2">
+                        <img src="c.webp" class="drawing-card border border-zinc-700" alt="Drawing 3">
+                        <img src="d.jpg" class="drawing-card border border-zinc-700" alt="Drawing 4">
+                        <img src="e.jpg" class="drawing-card border border-zinc-700" alt="Drawing 5">
+                        <img src="f.jpg" class="drawing-card border border-zinc-700" alt="Drawing 6">
+                        <img src="g.jpg" class="drawing-card border border-zinc-700" alt="Drawing 7">
                     </div>
                 </div>
                 
@@ -397,6 +411,12 @@
                             <i class="fas fa-server text-3xl text-zinc-400 group-hover:text-zinc-100 transition-colors"></i>
                             <span class="text-xs font-mono uppercase tracking-wider text-zinc-500">Hackathon / Web Dev</span>
                         </div>
+
+                        <!-- Image Slot (Curved Corners) -->
+                        <div class="w-full aspect-video mb-6 overflow-hidden rounded-2xl border border-zinc-800 relative bg-zinc-900">
+                            <img src="flowgrid.png" alt="Flowgrid Preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+
                         <h3 class="text-2xl font-bold text-brand-heading mb-3 group-hover:text-white transition-colors">Flowgrid</h3>
                         <p class="text-brand-text font-light leading-relaxed mb-6 flex-grow">
                             A smart, voice-controlled web app designed to help hospital staff quickly coordinate beds, doctors, and equipment without looking at a screen.
@@ -412,6 +432,12 @@
                             <i class="fas fa-microchip text-3xl text-zinc-400 group-hover:text-zinc-100 transition-colors"></i>
                             <span class="text-xs font-mono uppercase tracking-wider text-zinc-500">Hardware / Aviation</span>
                         </div>
+
+                        <!-- Image Slot (Curved Corners) -->
+                        <div class="w-full aspect-video mb-6 overflow-hidden rounded-2xl border border-zinc-800 relative bg-zinc-900">
+                            <img src="img2.jpeg" alt="Hardware Preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+
                         <h3 class="text-2xl font-bold text-brand-heading mb-3 group-hover:text-white transition-colors">ESP32 Aviation Safety System</h3>
                         <p class="text-brand-text font-light leading-relaxed mb-6 flex-grow">
                             An automated hardware prototype that prevents airplane crashes by actively measuring distance to the ground and automatically adjusting wing flaps.
@@ -567,7 +593,7 @@
                             </figure>
                             <figure class="m-0">
                                 <img src="img2.jpeg" alt="Landing Mechanism" class="w-full chamfer-lg border border-brand-border bouncy-hover cursor-pointer">
-                                <figcaption class="text-sm text-center text-zinc-500 mt-2">Landing Phase (< 10cm)</figcaption>
+                                <figcaption class="text-sm text-center text-zinc-500 mt-2">Landing Phase (&lt; 10cm)</figcaption>
                             </figure>
                             <figure class="m-0">
                                 <img src="img3.jpeg" alt="Approach Mechanism" class="w-full chamfer-lg border border-brand-border bouncy-hover cursor-pointer">
@@ -575,7 +601,7 @@
                             </figure>
                             <figure class="m-0">
                                 <img src="img4.jpeg" alt="Cruising Mechanism" class="w-full chamfer-lg border border-brand-border bouncy-hover cursor-pointer">
-                                <figcaption class="text-sm text-center text-zinc-500 mt-2">Cruising Phase (> 30cm)</figcaption>
+                                <figcaption class="text-sm text-center text-zinc-500 mt-2">Cruising Phase (&gt; 30cm)</figcaption>
                             </figure>
 
                             <!-- Team Photos -->
