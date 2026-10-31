@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
@@ -34,9 +34,25 @@
             }
         }
     </script>
-    
+
     <style>
         body { font-family: 'Inter', sans-serif; }
+
+        /* ===== Prevent horizontal scroll on mobile ===== */
+        html, body {
+            max-width: 100%;
+            overflow-x: clip; /* 'clip' keeps the sticky navbar working, unlike 'hidden' */
+        }
+        img, video { max-width: 100%; }
+
+        /* Hover tooltips can't be triggered on touch screens anyway,
+           and their invisible 288px boxes overflow the screen edge */
+        @media (max-width: 768px) {
+            div.absolute.bottom-full {
+                display: none;
+            }
+        }
+
         /* Custom mouse pointer */
         *, *::before, *::after {
             cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 512 512'><path d='M129 112 C128 78 160 58 190 78 L435 268 C462 290 450 330 412 333 L330 333 C295 333 280 345 262 368 L215 430 C190 462 148 450 146 415 Z' fill='white' stroke='%2309090b' stroke-width='34' stroke-linejoin='round'/></svg>") 6 4, auto !important;
@@ -46,13 +62,13 @@
         a, button, [onclick], .cursor-pointer, .drawing-card, video {
             cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 512 512'><path d='M129 112 C128 78 160 58 190 78 L435 268 C462 290 450 330 412 333 L330 333 C295 333 280 345 262 368 L215 430 C190 462 148 450 146 415 Z' fill='%23d4b26a' stroke='%2309090b' stroke-width='34' stroke-linejoin='round'/></svg>") 6 4, pointer !important;
         }
-        
+
         .nav-link { position: relative; }
         .nav-link::after {
             content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background-color: #fafafa; transition: width 0.3s ease;
         }
         .nav-link:hover::after { width: 100%; }
-        
+
         /* Bouncy fade in animation for SPA transitions */
         .fade-in {
             animation: bouncyFadeIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
@@ -102,8 +118,8 @@
 
         /* Interactive B&W Cursor Spotlight Gradient */
         .project-box {
-            background: #18181b; 
-            border: 1px solid #52525b; 
+            background: #18181b;
+            border: 1px solid #52525b;
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
@@ -114,7 +130,7 @@
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(
-                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
                 rgba(255, 255, 255, 0.08),
                 transparent 40%
             );
@@ -184,16 +200,16 @@
     <!-- Navigation -->
     <nav class="w-full py-6 px-6 md:px-12 flex justify-between items-center sticky top-0 bg-brand-bg/70 backdrop-blur-md z-50 border-b border-brand-border">
         <a href="#" onclick="goHome()" class="text-xl font-bold tracking-tight text-brand-heading">AG</a>
-        
+
         <!-- Desktop Nav -->
         <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
             <a href="#about" onclick="goHome()" class="nav-link text-brand-text hover:text-brand-heading transition-colors">About Me</a>
             <a href="#skills" onclick="goHome()" class="nav-link text-brand-text hover:text-brand-heading transition-colors">Skills</a>
             <a href="#projects" onclick="goHome()" class="nav-link text-brand-text hover:text-brand-heading transition-colors">Projects</a>
             <a href="#contact" onclick="goHome()" class="nav-link text-brand-text hover:text-brand-heading transition-colors">Contact</a>
-            
+
             <div class="w-px h-5 bg-brand-border mx-2"></div> <!-- Divider -->
-            
+
             <a href="https://github.com/mr-aadigupta" target="_blank" class="text-brand-text hover:text-brand-heading transition-colors text-xl" aria-label="GitHub">
                 <i class="fab fa-github"></i>
             </a>
@@ -201,7 +217,7 @@
                 <i class="fab fa-linkedin"></i>
             </a>
         </div>
-        
+
         <!-- Mobile Menu Icon -->
         <div class="md:hidden flex items-center space-x-4">
             <a href="https://github.com/mr-aadigupta" target="_blank" class="text-brand-text text-lg"><i class="fab fa-github"></i></a>
@@ -228,7 +244,7 @@
 
             <!-- Hero / About Section -->
             <section id="about" class="py-20 md:py-32 border-b border-brand-border">
-                
+
                 <!-- Intro & Image Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
                     <div class="md:col-span-7 space-y-6 order-2 md:order-1 text-pop-up">
@@ -238,15 +254,15 @@
                         </h1>
                         <div class="text-base md:text-lg text-brand-text leading-relaxed font-light space-y-4 text-pop-up delay-100">
                             <p>
-                                I am currently pursuing my <strong>B.Tech-CSE degree (Class of '30)</strong> at the <strong>Vellore Institute of Technology (VIT)</strong>, Vellore. 
+                                I am currently pursuing my <strong>B.Tech-CSE degree (Class of '30)</strong> at the <strong>Vellore Institute of Technology (VIT)</strong>, Vellore.
                             </p>
                             <p>
                                 I was born and raised in Jhajjar, Haryana, where I completed my early schooling up to the 10th grade at R.E.D. Senior Secondary School. I then moved to Delhi to complete my 11th and 12th grades at James Convent School, Nangloi under the CBSE board, which shaped my analytical foundation.
                             </p>
                             <p>
-                                I have always had a deep love for coding. My core interests lie in building robust software solutions and exploring the bridge between software and hardware through sensor integration and hardware prototyping. 
+                                I have always had a deep love for coding. My core interests lie in building robust software solutions and exploring the bridge between software and hardware through sensor integration and hardware prototyping.
                             </p>
-                            
+
                             <!-- The 3 Pointers -->
                             <div class="pt-2">
                                 <p class="text-zinc-200 mb-3 text-sm font-medium uppercase tracking-wider">A bit more about me:</p>
@@ -282,7 +298,7 @@
                 <div class="mt-24 text-pop-up delay-400 text-center w-full">
                     <h3 class="text-2xl font-bold tracking-tight text-brand-heading mb-2">My Sketches & Drawings</h3>
                     <p class="text-brand-text font-light mb-4">Hover over the cards to expand and explore my creative hobby.</p>
-                    
+
                     <div class="drawing-container">
                         <img src="a.jpg" class="drawing-card border border-zinc-700" alt="Drawing 1">
                         <img src="b.webp" class="drawing-card border border-zinc-700" alt="Drawing 2">
@@ -293,7 +309,7 @@
                         <img src="g.jpg" class="drawing-card border border-zinc-700" alt="Drawing 7">
                     </div>
                 </div>
-                
+
             </section>
 
             <!-- Skills Section -->
@@ -302,9 +318,9 @@
                     <h2 class="text-3xl font-bold tracking-tight text-brand-heading mb-3">Technical Skills</h2>
                     <p class="text-brand-text font-light">Languages, tools, and methodologies I work with. Hover for details.</p>
                 </div>
-                
+
                 <div class="flex flex-wrap justify-center gap-4 text-pop-up delay-100 max-w-5xl mx-auto">
-                    
+
                     <!-- Skill with Tooltip -->
                     <div class="relative group cursor-default">
                         <span class="px-7 py-3.5 md:px-8 md:py-4 bg-brand-card border border-brand-border rounded-full text-base md:text-lg font-semibold text-brand-text group-hover:text-white group-hover:border-zinc-500 bouncy-hover inline-block">Python</span>
@@ -403,7 +419,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 text-pop-up delay-100">
-                    
+
                     <!-- Project Card 1: Flowgrid -->
                     <div onclick="showProject('flowgrid')" class="group cursor-pointer project-box chamfer-lg p-8 flex flex-col h-full text-left">
                         <div class="flex justify-between items-start mb-6">
@@ -455,7 +471,7 @@
                     <h2 class="text-3xl font-bold tracking-tight text-brand-heading mb-3">Future Aspirations & Goals</h2>
                     <p class="text-brand-text font-light">Where I am heading next in my tech journey.</p>
                 </div>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-brand-card border border-brand-border p-8 chamfer-lg bouncy-hover">
                         <div class="bg-zinc-800/50 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-brand-heading">
@@ -495,22 +511,22 @@
     <!-- ========================================== -->
     <!-- PROJECT DETAIL VIEWS (Hidden by default)   -->
     <!-- ========================================== -->
-    
+
     <div id="project-detail-view" class="hidden flex-grow fade-in w-full">
         <main class="max-w-5xl mx-auto px-6 md:px-12 py-16">
-            
+
             <button onclick="goHome()" class="mb-12 inline-flex items-center text-sm font-medium text-zinc-400 hover:text-brand-heading transition-colors group">
                 <i class="fas fa-arrow-left mr-2 transform group-hover:-translate-x-1 transition-transform"></i> Back to Home
             </button>
 
             <!-- Flowgrid Detail -->
             <div id="detail-flowgrid" class="hidden project-content">
-                <div class="mb-6 flex items-center gap-3">
+                <div class="mb-6 flex flex-wrap items-center gap-3">
                     <span class="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-mono rounded-full">Web Dev</span>
                     <span class="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-mono rounded-full">Hackathon</span>
                 </div>
                 <h1 class="text-4xl md:text-5xl font-bold text-brand-heading mb-6">Flowgrid (ADG Hackgrid)</h1>
-                
+
                 <div class="flex flex-wrap gap-4 mb-8">
                     <a href="https://github.com/mr-aadigupta/flowgrid" target="_blank" class="px-5 py-2.5 bg-zinc-800 border border-zinc-700 text-white text-sm font-medium rounded-full hover:bg-zinc-700 bouncy-hover flex items-center gap-2">
                         <i class="fab fa-github text-lg"></i> View Source Code
@@ -522,7 +538,7 @@
 
                 <div class="prose prose-invert prose-zinc max-w-none text-brand-text font-light leading-relaxed space-y-6">
                     <p class="text-xl text-zinc-200"><strong>What it is:</strong> Flowgrid is a smart, voice-activated assistant built to help busy hospitals manage their resources without the chaos of endless phone calls and paperwork.</p>
-                    
+
                     <h3 class="text-2xl font-medium text-brand-heading mt-8 mb-4 border-b border-zinc-800 pb-2">The Problem</h3>
                     <p>In emergency situations, hospital staff waste precious time searching databases or calling around to find out if a bed, a specific specialist (like a cardiologist), or a piece of equipment is currently available. We wanted to solve this operational nightmare.</p>
 
@@ -542,16 +558,16 @@
 
             <!-- Sensored BeyondX Detail -->
             <div id="detail-sensored" class="hidden project-content">
-                <div class="mb-6 flex items-center gap-3">
+                <div class="mb-6 flex flex-wrap items-center gap-3">
                     <span class="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-mono rounded-full">Hardware</span>
                     <span class="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-mono rounded-full">Embedded Systems</span>
                     <span class="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-mono rounded-full">Hackathon</span>
                 </div>
                 <h1 class="text-4xl md:text-5xl font-bold text-brand-heading mb-6">ESP32 Aviation GPWS & Auto-Flap Landing System</h1>
-                
+
                 <div class="prose prose-invert prose-zinc max-w-none text-brand-text font-light leading-relaxed space-y-8">
                     <p class="text-xl text-zinc-200">Our team, <strong>Fantastic Four</strong>, secured the <strong>second position (as freshers)</strong> in the Sensored BeyondX hackathon organized by the TEC club at VIT Vellore.</p>
-                    
+
                     <div>
                         <h3 class="text-2xl font-medium text-brand-heading mb-3">1. The Problem: Planes Crashing into the Ground</h3>
                         <p>Sometimes, perfectly good airplanes crash into the ground or water simply because the pilot gets confused in bad weather, fog, or the dark. This is called CFIT (Controlled Flight Into Terrain). Standard plane sensors (barometers) can get confused by weather changes and aren't accurate enough when the plane is just feet away from hitting the ground.</p>
@@ -563,7 +579,7 @@
                         <ul class="list-disc pl-5 space-y-2 mt-4 text-zinc-300">
                             <li><strong>Double-Checking Height:</strong> We combined a standard pressure sensor (for flying high) with an ultrasonic radar (like a bat uses) to measure the exact distance to the ground with pinpoint accuracy when the plane gets low.</li>
                             <li><strong>Watching the Tilt:</strong> An accelerometer constantly monitors the angle of the plane to see if it's nose-diving dangerously.</li>
-                            <li><strong>Automatic Life-Saving Action:</strong> 
+                            <li><strong>Automatic Life-Saving Action:</strong>
                                 If the system realizes the plane is diving too fast or too steeply near the ground, it doesn't just warn the pilot—it acts. It instantly flashes red lights, sounds a loud emergency siren, and <strong>automatically forces the wing flaps into a safe position (0°)</strong> to help prevent a crash.
                             </li>
                             <li><strong>Smooth Landing Assist:</strong> If the plane is coming in at a safe angle, the system automatically adjusts the flaps (to 45° then 90°) to help it land smoothly, taking work off the pilot's plate.</li>
@@ -616,7 +632,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </main>
     </div>
 
@@ -627,7 +643,7 @@
             <p class="text-brand-text font-light mb-8 leading-relaxed">
                 I'm currently seeking new opportunities and projects where I can apply my skills in software and hardware development. My inbox is always open.
             </p>
-            
+
             <!-- Contact Details -->
             <div class="mb-10 flex flex-col sm:flex-row items-center justify-center gap-6 text-zinc-400 font-medium">
                 <a href="mailto:aadibrjmd@gmail.com" class="hover:text-brand-heading transition-colors flex items-center gap-2 group">
@@ -702,17 +718,17 @@
         function renderProjectView(projectId) {
             mainView.classList.add('hidden');
             contactSection.classList.add('hidden');
-            
+
             projectContents.forEach(content => {
                 content.classList.add('hidden');
             });
-            
+
             projectDetailView.classList.remove('hidden');
             const targetProject = document.getElementById(`detail-${projectId}`);
             if(targetProject) {
                 targetProject.classList.remove('hidden');
             }
-            
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -720,7 +736,7 @@
             projectDetailView.classList.add('hidden');
             mainView.classList.remove('hidden');
             contactSection.classList.remove('hidden');
-            
+
             // Optionally, scroll smoothly back to the projects section
             const projectsSection = document.getElementById('projects');
             if (projectsSection) {
@@ -731,7 +747,7 @@
         // Listen for browser back/forward buttons
         window.addEventListener('popstate', (event) => {
             const state = event.state;
-            
+
             // If there's no state (initial load) or state is 'home', go to home view
             if (!state || state.view === 'home') {
                 renderHomeView();
@@ -747,7 +763,7 @@
             if (hash.startsWith('#project-')) {
                 const projectId = hash.replace('#project-', '');
                 // Replace initial state so hitting 'back' leaves the site cleanly if they landed directly on a project
-                history.replaceState({ view: 'project', id: projectId }, '', hash); 
+                history.replaceState({ view: 'project', id: projectId }, '', hash);
                 renderProjectView(projectId);
             } else {
                 history.replaceState({ view: 'home' }, '', window.location.pathname + window.location.search);
